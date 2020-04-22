@@ -24,7 +24,7 @@ func Collection(category string, pageno int) ([]Product, error) {
 	doc.Find("a.grid-link").Each(func(i int, el *goquery.Selection) {
 		for _, v := range el.Nodes {
 			wg.Add(1)
-			func(node *html.Node) {
+			go func(node *html.Node) {
 				defer wg.Done()
 				url := FindAttr(*v, "href")
 				p, err := FetchProduct(url)
