@@ -11,6 +11,7 @@ import (
 
 // Collection finds all the link from the font page.
 func Collection(category string, pageno int) ([]Product, error) {
+	fmt.Println("downloading collection", category, "pageno", pageno)
 	doc, err := outer.Get(fmt.Sprintf("https://www.bridallehengastore.com/collections/%s?page=%d", category, pageno))
 	if err != nil {
 		return nil, err
@@ -40,7 +41,7 @@ func Collection(category string, pageno int) ([]Product, error) {
 	})
 
 	wg.Wait()
-
+	fmt.Println("downloaded collection", category, "pageno", pageno)
 	return out, nil
 
 }

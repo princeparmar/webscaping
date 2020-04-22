@@ -36,7 +36,7 @@ type Media struct {
 }
 
 func FetchProduct(url string) (*Product, error) {
-	fmt.Print("downloading", url)
+	fmt.Println("downloading", url)
 	doc, err := outer.Get("https://www.bridallehengastore.com" + url)
 	if err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func FetchProduct(url string) (*Product, error) {
 	}
 
 	err = product.LoadMedia()
-	fmt.Print("downloaded", url)
+	fmt.Println("downloaded", url)
 
 	return product, err
 }
