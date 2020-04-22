@@ -62,7 +62,7 @@ func (p *Product) LoadMedia() error {
 	basePath := strings.ReplaceAll(p.Type, " ", "")
 	for i, m := range p.Media {
 		var err error
-		m.LocalPath, err = outer.Download(m.Src, path.Join("images", basePath))
+		m.LocalPath, err = outer.Download(m.Src, path.Join("output", "images", basePath))
 		if err != nil {
 			return err
 		}
@@ -72,11 +72,12 @@ func (p *Product) LoadMedia() error {
 	return nil
 }
 
-func SaveAllProducts(p ...Product) error {
-	basePath := strings.ReplaceAll(p[0].Type, " ", "")
-	err := os.MkdirAll("data", 0700)
+func (p Product) Save() error {
+	basePath := strings.ReplaceAll(p.Type, " ", "")
+	basePath = path.Join("output", "data", basePath)
+	err := os.MkdirAll(basePath, 0700)
 	if err != nil && !os.IsExist(err) {
 		return err
 	}
-	return outer.SaveFile(path.Join("data", basePath), p)
+	return outer.SaveFile(path.Join(basePath, fmt.Sprintf("%d", p.ID)), p)
 }
