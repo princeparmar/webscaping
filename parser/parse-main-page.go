@@ -50,7 +50,7 @@ func FullCollection(name string) ([]Product, error) {
 	var out []Product
 	var mx sync.Mutex
 
-	for i := 0; ; i++ {
+	for i := 1; ; i++ {
 		tmp, err := Collection(name, i)
 		if err != nil {
 			return nil, err

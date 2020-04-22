@@ -5,7 +5,8 @@
 *.so
 *.dylib
 webscaping
-
+data/
+images/
 # Test binary, built with `go test -c`
 *.test
 
